@@ -1,175 +1,118 @@
 package modele;
 
-import java.util.Scanner;
+import java.util.Calendar;
 
 public class Date {
-    protected int jour;
-    protected int mois;
-    protected int annee;
+    protected int chJour;
+    protected int chMois;
+    protected int chAnnee;
 
-    /**
-     * constructeur de la classe Modèle.Date, qui instancie une date précise
-     *
-     *
-     *
-     * @parameter int parJour, le jour en question
-     * @parameter int parMois, le ois de l'année
-     * @parameter int parAnnee, l'année donnée
-     */
-    public Date(int parJour, int parMois, int parAnnee) {
-        jour =  parJour;
-        mois = parMois;
-        annee = parAnnee;
+    public Date(int parJour, int parMois, int parAnnee)  {
+        chJour = parJour ;
+        chMois = parMois ;
+        chAnnee = parAnnee ;
     }
-    /**
-     * constructeur de la classe Modèle.Date, qui instancie le premier janvier de l'année
-     *
-     *
-     *
-     * @parameter int parAnnee, l'année donnée
-     */
-    public Date(int parAnnee) {
-        annee = parAnnee;
-        jour = 1;
-        mois = 1;
+
+    public Date(int parAnnee)  {
+        chJour = 1 ;
+        chMois = 1 ;
+        chAnnee = parAnnee ;
     }
 
     public Date() {
-
+        Calendar dateAuj = Calendar.getInstance();
+        chAnnee = dateAuj.get (Calendar.YEAR);
+        chMois = dateAuj.get (Calendar.MONTH) + 1;
+        chJour = dateAuj.get (Calendar.DAY_OF_MONTH);
     }
 
     /**
-     * déclare si une année est bissextile
-     *
-     *
-     *
-     * @parameter int parAn, l'année en question
-     * @return Boolean, vrai si l'année est bissextile, faux sinon
+     retourne true si this est une date valide
+     -  chAnnee > 1582
+     - 1 <= chMois <= 12
+     - 1 <= chJour et chJour <= dernierJourDuMois (chJour, chAnnee)
+     retourne false si
      */
-    public static boolean estBissextile(int parAn) {
-        return parAn % 400 == 0 || (parAn % 4 == 0 && parAn % 100 != 0);
+    public boolean estValide () {
+        return chAnnee > 1582 &&
+                chMois >= 1 && chMois <= 12 &&
+                chJour >= 1 && chJour <= Date.dernierJourDuMois (chMois, chAnnee) ;
     }
-    /**
-     * donne le dernier jour d'un mois une certaine année
-     *
-     *
-     * @parameter int parMois, le mois concerné
-     * @parameter int parAn, l'année concernée
-     * @return int, le dernier jour du mois à l'année renseignée
-     */
-    public static int dernierJourMois(int parMois, int parAn) {
-        int nombreJoursMois = 30 ;
-        if (parMois == 1 ||parMois == 3 || parMois == 5 || parMois == 7 || parMois == 8 || parMois == 10 || parMois == 12) {
-            nombreJoursMois += 1;
+
+
+    protected static int dernierJourDuMois (int parMois, int parAnnee) {
+        switch (parMois) {
+            case 2 : if (Date.estBissextile (parAnnee))
+                return 29 ;
+                return 28 ;
+            case 4 :
+            case 6 :
+            case 9 :
+            case 11 : return 30 ;
+            default : return 31 ;
         }
-        else if (parMois == 2) {
-            if (estBissextile(parAn)) {
-                nombreJoursMois -= 1;
-            }
-            else nombreJoursMois -= 2;
-        }
-        return nombreJoursMois;
     }
-    /**
-     * vérifie si la date est valide
-     *
-     *
-     *
-     *
-     * @return Boolean, vrai si la date existe et faux si elle n'existe pas
-     */
-    public static boolean estValide(int parJour, int parMois, int parAnnee) {
-        int nombreJoursMois = dernierJourMois(parMois, parAnnee);
-        return parJour >= 1 && parMois >= 1 && parMois <= 12 && parAnnee >= 1583 && parJour <= nombreJoursMois;
-    }
-    /**
-     * instancie un objet Modèle.Date avec les valeurs données dans le scanner
-     *
-     *
-     *
-     *
-     * @return Modèle.Date, la date donnée
-     */
-    public static Date lireDate(){
-        Scanner scanner = new Scanner(System.in);
 
-        int lireJour = scanner.nextInt();
-        int lireMois = scanner.nextInt();
-        int lireAn = scanner.nextInt();
-        return  new Date(lireJour, lireMois, lireAn);
+    private static boolean estBissextile(int parAnnee) {
+        return (parAnnee % 4 == 0 && parAnnee % 100 != 0) || parAnnee % 400 == 0;
     }
+
+
     /**
-     * compare deux dates, this et parDate
-     *
-     *
-     *
-     * @parameter Modèle.Date parDate, la Modèle.Date à laquelle on compare this Modèle.Date
-     * @return -1 si this Modèle.Date précède parDate, 1 si this Modèle.Date vient après parDate, 0 si elles sont égales
+     compare les dates this et parDate
+     retourne 0 si this et parDate sont égales
+     retroune un entier négatif si this est antérieure à parDate
+     retourne un entier positif si this es postérieure à parDate
      */
     public int compareTo (Date parDate) {
-        if (parDate.annee > annee) {
+        if (chAnnee < parDate.chAnnee)
+            return -8;
+        if (chAnnee > parDate.chAnnee)
+            return 19;
+        // les années sont =
+        if (chMois < parDate.chMois)
             return -1;
-        }
-        if  (parDate.annee == annee) {
-            if (parDate.mois > mois) {
-                return -1;
-            }
-            if (parDate.mois == mois) {
-                if (parDate.jour > jour) {
-                    return -1;
-                }
-                if (parDate.jour == jour) {
-                    return 0;
-                }
-                else return 1;
-            }
-            else return 1;
-        }
-        else return 1;
+        if (chMois > parDate.chMois)
+            return 18;
+        // les mois sont =
+        if (chJour < parDate.chJour)
+            return -7;
+        if (chJour > parDate.chJour)
+            return 12;
+        return 0;
     }
-    /**
-     * renvoie la date qui suit celle de l'objet qui appelle
-     *
-     *
-     *
-     *
-     * @return Modèle.Date, la date du lendemain
-     */
-    public Date dateDuLendemain (){
-        if (!estValide(jour,mois,annee)) {
-            System.out.println("la date n'est pas valide");
-            return null;
-        }
-        if (dernierJourMois(annee, mois) == jour) {
-            if (mois == 12) {
-                return new Date(0, 0, annee + 1);
-            }
-            else return new Date(0, mois + 1, annee);
-        }
-        return new Date(jour+1, mois, annee);
+
+    public Date dateDuLendemain ()   {
+        if (chJour < Date.dernierJourDuMois(chMois,chAnnee))
+            return new Date(chJour+1,chMois,chAnnee);
+        if (chMois < 12)
+            return  new Date(1,chMois+1,chAnnee);
+        return  new Date(1,1,chAnnee+1);
     }
-    /**
-     * renvoie la date qui précède celle de l'objet qui appelle
-     *
-     * @return Modèle.Date, la date de la veille
-     */
-    public Date dateDeLaVeille (){
-        if (!estValide(jour,mois,annee)) {
-            System.out.println("la date n'est pas valide");
-            return null;
-        }
-        if (1 == jour) {
-            if (mois == 1) {
-                return new Date(31, 12, annee - 1);
-            }
-            return new Date(dernierJourMois(annee, mois-1), mois-1, annee);
-        }
-        return  new Date(jour -1, mois, annee);
+
+    public Date dateDeLaVeille ()  {
+        if (chJour > 1)
+            return  new Date(chJour-1,chMois,chAnnee);
+        if (chMois > 1)
+            return new Date(Date.dernierJourDuMois(chMois-1, chAnnee),chMois-1,chAnnee);
+        return new Date(31,12,chAnnee-1);
     }
-    public String toString() {
-        return  jour + " / " + mois + " / " + annee;
+
+    public int getAnnee() {
+        return chAnnee;
+    }
+
+    public int getJour() {
+        return chJour;
+    }
+
+    public int getMois() {
+        return chMois;
+    }
+
+    public String toString () {
+        return  chJour + "-" + chMois + "-" +chAnnee;
     }
 
 
 }
-
