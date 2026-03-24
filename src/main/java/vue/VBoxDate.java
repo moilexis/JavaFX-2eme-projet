@@ -1,4 +1,6 @@
 package vue;
 
-public class VBoxDate {
+import javafx.scene.layout.VBox;
+
+public class VBoxDate extends VBox {
 }
