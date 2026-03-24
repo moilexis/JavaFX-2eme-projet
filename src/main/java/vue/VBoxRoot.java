@@ -1,6 +1,7 @@
 package vue;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import modele.CalendrierDuMois;
 import modele.ConstantesCalendrier;
@@ -10,14 +11,7 @@ public class VBoxRoot extends VBox {
 
     public VBoxRoot(int spacing) {
         super.setSpacing(spacing);
-        /*
-        DateCalendrier dateDuJour = new DateCalendrier();
-        Label aujourdhui = new Label(dateDuJour.toString());
-        getChildren().add(aujourdhui);
-        DateCalendrier dateDemain = dateDuJour.dateDuLendemain();
-        Label demain = new Label(dateDemain.toString());
-        getChildren().add(demain);
-        */
+
         DateCalendrier dateDuJour = new DateCalendrier();
         CalendrierDuMois ceMois = new CalendrierDuMois(dateDuJour.getMois(),dateDuJour.getAnnee());
         Label etiCeMois = new Label("#########"+ConstantesCalendrier.Mois.values() [ceMois.getMois()-1]+ " " + ceMois.getAnnee()+"#########");
@@ -32,7 +26,9 @@ public class VBoxRoot extends VBox {
                 dates.getChildren().add(etiCetteDate);
             }
         }
-        super.getChildren().add(dates);
+        ScrollPane scrollPaneDates = new ScrollPane();
+        scrollPaneDates.setContent(dates);
+        super.getChildren().add(scrollPaneDates);
     }
 
 
