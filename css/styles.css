@@ -1,0 +1,14 @@
+#mois{
+    -fx-font-weight: bold;
+    -fx-font-size: 20px ;
+}
+
+#jours{
+    -fx-text-fill: Khaki;
+
+}
+
+.scroll-pane{
+    -fx-background : indianred;
+    -fx-border-color : #df6a1b;
+}
