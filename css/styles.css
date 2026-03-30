@@ -1,6 +1,8 @@
 #mois{
     -fx-font-weight: bold;
     -fx-font-size: 20px ;
+    -fx-border-color : indianred;
+    -fx-border-width: 5px;
 }
 
 #jours{
