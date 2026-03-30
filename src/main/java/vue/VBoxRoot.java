@@ -49,7 +49,7 @@ public class VBoxRoot extends VBox {
             monthStackPane.getChildren().add(scrollPaneDates);
 
         }
-
+        monthStackPane.getChildren().get(ceMois.getMois()-1).toFront();
         super.getChildren().add(monthStackPane);
 
 
