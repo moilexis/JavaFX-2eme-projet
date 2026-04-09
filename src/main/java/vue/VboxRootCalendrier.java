@@ -45,7 +45,15 @@ public class VboxRootCalendrier {
                         System.out.println(boutonDate.getUserData().toString());
                     }
                 });
+                if (date.getMois() != moisCalendrier.getMois()){
+                    boutonDate.setId("horsMois");
+                }
+                if (date.compareTo(today) == 0){
+                    boutonDate.setId("today");
+                }
             }
+            tilePaneMois.setAccessibleText(ConstantesCalendrier.Mois.values()[idxMois-1].toString());
+            monthStackPane.getChildren().add(tilePaneMois);
         }
     }
 
