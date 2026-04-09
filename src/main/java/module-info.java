@@ -3,6 +3,7 @@ module com.example.deuxieme_projet {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    requires java.desktop;
     //    requires com.example.deuxieme_projet;
 
 
