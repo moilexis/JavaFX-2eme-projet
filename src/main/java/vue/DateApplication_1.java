@@ -12,7 +12,7 @@ public class DateApplication_1 extends Application {
     public void start(Stage stage) {
 
         VBox root = new VboxRootCalendrier();
-        Scene scene = new Scene(root,300,100);
+        Scene scene = new Scene(root,300,300);
         stage.setTitle("Application Dates");
         stage.setScene(scene);
         File css = new File("css"+File.separator+"styles.css");

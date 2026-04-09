@@ -20,7 +20,7 @@ import java.util.List;
 public class VboxRootCalendrier extends VBox {
     public VboxRootCalendrier() {
         super.setSpacing(10);
-        HBox menu = new HBox(10);
+
         Date today = new DateCalendrier();
 
         StackPane monthStackPane = new StackPane();
@@ -29,6 +29,7 @@ public class VboxRootCalendrier extends VBox {
         for (int idxMois = 1; idxMois <= 12 ; idxMois ++ ){
             CalendrierDuMois moisCalendrier = new CalendrierDuMois(idxMois, today.getAnnee());
             TilePane tilePaneMois = new TilePane();
+            tilePaneMois.setHgap(15);
 
             tilePaneMois.setPrefColumns(7);
 
@@ -65,7 +66,8 @@ public class VboxRootCalendrier extends VBox {
         }
 
         Label etiDuMois = new Label(ConstantesCalendrier.Mois.values() [today.getMois()-1]+ " " + today.getAnnee());
-        menu.getChildren().add(etiDuMois);
+        this.getChildren().add(etiDuMois);
+
         List<Node> liste = monthStackPane.getChildren();
         while ((liste.get(liste.size()-1).getAccessibleText())!=(ConstantesCalendrier.Mois.values()[today.getMois()-1].toString() )){
             liste.get(0).toFront();
@@ -74,7 +76,7 @@ public class VboxRootCalendrier extends VBox {
 
         }
         //création des boutons
-
+        HBox menu = new HBox(50);
         Button Retourrapide = new Button("<<");
         Retourrapide.setOnAction(e-> {
             System.out.println("premier mois");
@@ -110,8 +112,9 @@ public class VboxRootCalendrier extends VBox {
             }
         });
         menu.getChildren().add(Avancerapide);
-        this.getChildren().add(menu);
+
         this.getChildren().add(monthStackPane);
+        this.getChildren().add(menu);
 
     }
 

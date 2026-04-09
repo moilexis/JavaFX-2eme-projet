@@ -1,16 +1,18 @@
-#mois{
-    -fx-font-weight: bold;
-    -fx-font-size: 20px ;
-    -fx-border-color : indianred;
-    -fx-border-width: 5px;
+#opaque {
+    -fx-background-color: white;
 }
-
-#jours{
-    -fx-text-fill: Khaki;
-
+.toggle-button{
+    -fx-background-color: white;
 }
-
-.scroll-pane{
-    -fx-background : indianred;
-    -fx-border-color : #df6a1b;
+.toggle-button:selected {
+    -fx-background-color: #ffb27b;
+}
+#today{
+    -fx-background-color: coral;
+}
+#horsMois {
+    -fx-text-fill : grey;
+}
+.tilepane{
+    -fx-background-color: #d4cf9c;
 }
