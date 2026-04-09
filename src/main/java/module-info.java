@@ -4,6 +4,7 @@ module com.example.deuxieme_projet {
 
     requires org.controlsfx.controls;
     requires java.desktop;
+    requires javafx.graphics;
     //    requires com.example.deuxieme_projet;
 
 

@@ -3,16 +3,24 @@ package vue;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import modele.*;
 
+import java.util.List;
 
-public class VboxRootCalendrier {
+
+public class VboxRootCalendrier extends VBox {
     public VboxRootCalendrier() {
+        super.setSpacing(10);
+        HBox menu = new HBox(10);
         Date today = new DateCalendrier();
 
         StackPane monthStackPane = new StackPane();
@@ -55,6 +63,56 @@ public class VboxRootCalendrier {
             tilePaneMois.setAccessibleText(ConstantesCalendrier.Mois.values()[idxMois-1].toString());
             monthStackPane.getChildren().add(tilePaneMois);
         }
+
+        Label etiDuMois = new Label(ConstantesCalendrier.Mois.values() [today.getMois()-1]+ " " + today.getAnnee());
+        menu.getChildren().add(etiDuMois);
+        List<Node> liste = monthStackPane.getChildren();
+        while ((liste.get(liste.size()-1).getAccessibleText())!=(ConstantesCalendrier.Mois.values()[today.getMois()-1].toString() )){
+            liste.get(0).toFront();
+            etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + today.getAnnee());
+
+
+        }
+        //création des boutons
+
+        Button Retourrapide = new Button("<<");
+        Retourrapide.setOnAction(e-> {
+            System.out.println("premier mois");
+            while ((liste.get(liste.size()-1).getAccessibleText())!=(ConstantesCalendrier.Mois.values()[0].toString() )) {
+                liste.get(liste.size()-1).toBack();
+                etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + today.getAnnee());
+            }
+        });
+        menu.getChildren().add(Retourrapide);
+
+        Button retourButton = new Button("<");
+        retourButton.setOnAction(e-> {
+            System.out.println("Mois précédent");
+            liste.get(liste.size()-1).toBack();
+            etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + today.getAnnee());
+        });
+        menu.getChildren().add(retourButton);
+
+        Button avanceButton = new Button(">");
+        avanceButton.setOnAction(e-> {
+            System.out.println("Mois suivant");
+            liste.get(0).toFront();
+            etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + today.getAnnee());
+        });
+        menu.getChildren().add(avanceButton);
+
+        Button Avancerapide = new Button(">>");
+        Avancerapide.setOnAction(e-> {
+            System.out.println("dernier mois");
+            while ((liste.get(liste.size()-1).getAccessibleText())!=(ConstantesCalendrier.Mois.values()[11].toString() )) {
+                liste.get(0).toFront();
+                etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + today.getAnnee());
+            }
+        });
+        menu.getChildren().add(Avancerapide);
+        this.getChildren().add(menu);
+        this.getChildren().add(monthStackPane);
+
     }
 
 }

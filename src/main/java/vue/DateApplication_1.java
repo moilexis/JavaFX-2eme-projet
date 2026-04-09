@@ -11,7 +11,7 @@ import java.util.Calendar;
 public class DateApplication_1 extends Application {
     public void start(Stage stage) {
 
-        VBox root = new VBoxRoot(10);
+        VBox root = new VboxRootCalendrier();
         Scene scene = new Scene(root,300,100);
         stage.setTitle("Application Dates");
         stage.setScene(scene);
