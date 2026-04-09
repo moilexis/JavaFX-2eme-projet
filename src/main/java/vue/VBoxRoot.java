@@ -52,45 +52,62 @@ public class VBoxRoot extends VBox {
                 }
 
             }
+            String moisActuel = ConstantesCalendrier.Mois.values()[i-1].toString();
 
             ScrollPane scrollPaneDates = new ScrollPane();
             scrollPaneDates.setContent(dates);
-            scrollPaneDates.setAccessibleText(String.valueOf(i));
+            scrollPaneDates.setAccessibleText(moisActuel);
             monthStackPane.getChildren().add(scrollPaneDates);
 
         }
+
+
+
+        List<Node> liste = monthStackPane.getChildren();
+        while ((liste.get(liste.size()-1).getAccessibleText())!=(ConstantesCalendrier.Mois.values()[dateDuJour.getMois()-1].toString() )){
+            liste.get(0).toFront();
+            etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + ceMois.getAnnee());
+
+
+        }
         //création des boutons
-        /*
+
+        Button Retourrapide = new Button("<<");
+        Retourrapide.setOnAction(e-> {
+            System.out.println("premier mois");
+            while ((liste.get(liste.size()-1).getAccessibleText())!=(ConstantesCalendrier.Mois.values()[0].toString() )) {
+                liste.get(liste.size()-1).toBack();
+                etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + ceMois.getAnnee());
+            }
+        });
+        menu.getChildren().add(Retourrapide);
+
         Button retourButton = new Button("<");
         retourButton.setOnAction(e-> {
-            if (ceMois.getMois()>1) {
-                System.out.println("Mois précédent");
-                ceMois = new CalendrierDuMois(ceMois.getMois() - 1, ceMois.getAnnee());
-                etiDuMois.setText(ConstantesCalendrier.Mois.values()[ceMois.getMois() - 1] + " " + ceMois.getAnnee());
-            }
-            else {System.out.println("retour impossible");
-            }
+            System.out.println("Mois précédent");
+            liste.get(liste.size()-1).toBack();
+            etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + ceMois.getAnnee());
         });
         menu.getChildren().add(retourButton);
+
         Button avanceButton = new Button(">");
         avanceButton.setOnAction(e-> {
-            if (ceMois.getMois()<12) {
                 System.out.println("Mois suivant");
-                ceMois = new CalendrierDuMois(ceMois.getMois() + 1, ceMois.getAnnee());
-                etiDuMois.setText(ConstantesCalendrier.Mois.values()[ceMois.getMois() - 1] + " " + ceMois.getAnnee());
-            }
-            else {System.out.println("avance impossible");
-            }
+                liste.get(0).toFront();
+            etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + ceMois.getAnnee());
         });
-
         menu.getChildren().add(avanceButton);
 
-         */
-        List<Node> liste = monthStackPane.getChildren();
-        while (monthStackPane.getAccessibleText().compareTo(liste.get(liste.size()-1).getAccessibleText()) != 0 ) {
-            liste.get(0).toFront();
-        }
-        //monthStackPane.getChildren().get(ceMois.getMois()-1).toFront();
+        Button Avancerapide = new Button(">>");
+        Avancerapide.setOnAction(e-> {
+            System.out.println("dernier mois");
+            while ((liste.get(liste.size()-1).getAccessibleText())!=(ConstantesCalendrier.Mois.values()[11].toString() )) {
+                liste.get(0).toFront();
+                etiDuMois.setText(liste.getLast().getAccessibleText()+ " " + ceMois.getAnnee());
+            }
+        });
+        menu.getChildren().add(Avancerapide);
+
         super.getChildren().add(monthStackPane);
 
 
