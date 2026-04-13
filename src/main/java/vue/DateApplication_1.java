@@ -2,6 +2,7 @@ package vue;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -10,7 +11,7 @@ import java.io.File;
 public class DateApplication_1 extends Application {
     public void start(Stage stage) {
 
-        VBox root = new VboxCalendrier();
+        HBox root = new HBoxRoot();
         Scene scene = new Scene(root,300,300);
         stage.setTitle("Application Dates");
         stage.setScene(scene);
