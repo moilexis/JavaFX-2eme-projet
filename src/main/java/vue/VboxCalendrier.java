@@ -17,8 +17,8 @@ import modele.*;
 import java.util.List;
 
 
-public class VboxRootCalendrier extends VBox {
-    public VboxRootCalendrier() {
+public class VboxCalendrier extends VBox {
+    public VboxCalendrier() {
         super.setSpacing(10);
 
         Date today = new DateCalendrier();

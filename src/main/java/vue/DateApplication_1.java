@@ -6,12 +6,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.Calendar;
 
 public class DateApplication_1 extends Application {
     public void start(Stage stage) {
 
-        VBox root = new VboxRootCalendrier();
+        VBox root = new VboxCalendrier();
         Scene scene = new Scene(root,300,300);
         stage.setTitle("Application Dates");
         stage.setScene(scene);
