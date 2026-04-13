@@ -12,7 +12,7 @@ public class GridPaneFomulaireReservation extends GridPane {
     public GridPaneFomulaireReservation() {
         super();
         this.getStyleClass().add("FomulaireResa");
-        setGridLinesVisible(true);
+        //setGridLinesVisible(true);
         setVgap(10);
         setHgap(10);
         setPadding(new Insets(20));
@@ -46,7 +46,7 @@ public class GridPaneFomulaireReservation extends GridPane {
         btnAvc.setToggleGroup(tgNiveau);
         btnAvc.setMnemonicParsing(true);
         add(btnAvc, 2, 3, 2, 1);
-        RadioButton btnExp = new RadioButton("_expert");
+        RadioButton btnExp = new RadioButton("e_xpert");
         btnExp.setToggleGroup(tgNiveau);
         btnExp.setMnemonicParsing(true);
         add(btnExp, 4, 3, 2, 1);
@@ -67,5 +67,12 @@ public class GridPaneFomulaireReservation extends GridPane {
         add(heure2, 4,5, 1, 1);
         Label min2 = new Label("min");
         add(min2, 6, 5, 1, 1);
+
+        //VALIDATION
+        Button annuler = new Button("_Annuler");
+        add(annuler, 3, 6, 2, 1);
+        Button enregistrer = new Button("Enregistrer");
+        add(enregistrer, 5, 6, 2, 1);
+
     }
 }
