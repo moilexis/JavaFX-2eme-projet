@@ -3,6 +3,7 @@ package vue;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class VboxCalendrier extends VBox {
     public VboxCalendrier() {
-        super.setSpacing(10);
+        super.setSpacing(3);
 
         Date today = new DateCalendrier();
 
@@ -64,9 +65,12 @@ public class VboxCalendrier extends VBox {
             tilePaneMois.setAccessibleText(ConstantesCalendrier.Mois.values()[idxMois-1].toString());
             monthStackPane.getChildren().add(tilePaneMois);
         }
-
+        HBox titre = new HBox();
+        titre.setAlignment(Pos.CENTER);
         Label etiDuMois = new Label(ConstantesCalendrier.Mois.values() [today.getMois()-1]+ " " + today.getAnnee());
+        etiDuMois.setId("etiquetteMoisCalendrier");
         this.getChildren().add(etiDuMois);
+        this.getChildren().add(titre);
 
         List<Node> liste = monthStackPane.getChildren();
         while ((liste.get(liste.size()-1).getAccessibleText())!=(ConstantesCalendrier.Mois.values()[today.getMois()-1].toString() )){
@@ -76,7 +80,8 @@ public class VboxCalendrier extends VBox {
 
         }
         //création des boutons
-        HBox menu = new HBox(50);
+        HBox menu = new HBox();
+        menu.setAlignment(Pos.CENTER);
         Button Retourrapide = new Button("<<");
         Retourrapide.setOnAction(e-> {
             System.out.println("premier mois");
