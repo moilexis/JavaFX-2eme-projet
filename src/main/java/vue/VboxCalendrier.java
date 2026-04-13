@@ -69,7 +69,7 @@ public class VboxCalendrier extends VBox {
         titre.setAlignment(Pos.CENTER);
         Label etiDuMois = new Label(ConstantesCalendrier.Mois.values() [today.getMois()-1]+ " " + today.getAnnee());
         etiDuMois.setId("etiquetteMoisCalendrier");
-        this.getChildren().add(etiDuMois);
+        titre.getChildren().add(etiDuMois);
         this.getChildren().add(titre);
 
         List<Node> liste = monthStackPane.getChildren();

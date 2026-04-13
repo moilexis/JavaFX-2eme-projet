@@ -16,3 +16,8 @@
 .tilepane{
     -fx-background-color: #d4cf9c;
 }
+#etiquetteMoisCalendrier{
+    -fx-text-fill: Orange;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 30px;
+}
