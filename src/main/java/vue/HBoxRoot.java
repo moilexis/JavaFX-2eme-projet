@@ -6,7 +6,8 @@ public class HBoxRoot extends HBox {
     public HBoxRoot() {
         super();
         VboxCalendrier vboxCalendrier = new VboxCalendrier();
-        this.setSpacing(10);
+        GridPaneFomulaireReservation grid = new GridPaneFomulaireReservation();
         this.getChildren().add(vboxCalendrier);
+        this.getChildren().add(grid);
     }
 }
