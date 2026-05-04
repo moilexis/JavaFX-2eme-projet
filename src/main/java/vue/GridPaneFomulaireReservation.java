@@ -16,7 +16,6 @@ public class GridPaneFomulaireReservation extends GridPane {
         setVgap(10);
         setHgap(10);
         setPadding(new Insets(20));
-
         DateCalendrier today = new DateCalendrier();
         Label lblDate = new Label(today.toString());
         add(lblDate, 2, 0, 2, 1);
