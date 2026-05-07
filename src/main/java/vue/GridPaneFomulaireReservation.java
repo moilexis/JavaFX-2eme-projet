@@ -1,5 +1,6 @@
 package vue;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -24,6 +25,7 @@ public class GridPaneFomulaireReservation extends GridPane {
         lblCours.setMnemonicParsing(true);
         add(lblCours, 1, 1, 1, 1);
         TextField tfCours = new TextField();
+        Platform.runLater(()-> tfCours.requestFocus());
         lblCours.setLabelFor(tfCours);
         add(tfCours, 2, 1, 4, 1);
 
