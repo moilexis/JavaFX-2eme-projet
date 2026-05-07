@@ -1,11 +1,12 @@
 package vue;
 
+import controle.Controleur;
 import javafx.scene.layout.HBox;
-import modele.PlanningCollections;
+import modele.*;
 
 public class HBoxRoot extends HBox {
     private static PlanningCollections planning ;
-    private static Object controleur ;
+    private static Controleur controleur ;
     private static VboxCalendrier calendrier;
     private static GridPaneFomulaireReservation reservation;
     public HBoxRoot() {
@@ -16,5 +17,15 @@ public class HBoxRoot extends HBox {
         reservation= new GridPaneFomulaireReservation();
         this.getChildren().add(calendrier);
         this.getChildren().add(reservation);
+    }
+
+    public static PlanningCollections getPlanning() {
+        return planning;
+    }
+    public static VboxCalendrier getCalendrier(){
+        return calendrier;
+    }
+    public static GridPaneFomulaireReservation getReservation() {
+        return reservation;
     }
 }
