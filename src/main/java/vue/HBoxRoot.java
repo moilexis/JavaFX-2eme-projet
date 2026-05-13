@@ -11,7 +11,8 @@ public class HBoxRoot extends HBox {
     private static GridPaneFomulaireReservation reservation;
     public HBoxRoot() {
         super(20);
-        //ijnstanciation des champs
+        //instanciation des champs
+        controleur = new Controleur();
         planning = new PlanningCollections();
         calendrier = new VboxCalendrier();
         reservation= new GridPaneFomulaireReservation();
@@ -25,6 +26,7 @@ public class HBoxRoot extends HBox {
     public static VboxCalendrier getCalendrier(){
         return calendrier;
     }
+    public static Controleur getControleur(){return controleur;}
     public static GridPaneFomulaireReservation getReservation() {
         return reservation;
     }

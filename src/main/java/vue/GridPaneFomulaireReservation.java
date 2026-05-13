@@ -1,15 +1,26 @@
 package vue;
 
+import controle.Controleur;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.util.Pair;
 import modele.DateCalendrier;
+import modele.Horaire;
+import modele.PlageHoraire;
 
 import java.util.ArrayList;
 
 
+
 public class GridPaneFomulaireReservation extends GridPane {
+    private DateCalendrier dateDuJour;
+    private Label dateLabel;
+    private Pair<ComboBox<String>, ComboBox<String>> heuresDebut;
+    private Pair<ComboBox<String>, ComboBox<String>> heuresFin;
+    private TextField nomResa;
     public GridPaneFomulaireReservation() {
         super();
         this.getStyleClass().add("FomulaireResa");
@@ -18,13 +29,16 @@ public class GridPaneFomulaireReservation extends GridPane {
         setHgap(10);
         setPadding(new Insets(20));
         DateCalendrier today = new DateCalendrier();
-        Label lblDate = new Label(today.toString());
-        add(lblDate, 2, 0, 2, 1);
+        dateDuJour = today;
+        dateLabel = new Label(dateDuJour.toString());
+        add(dateLabel, 2, 0, 4, 1);
         //SAISIE DU COURS
         Label lblCours = new Label("_cours");
         lblCours.setMnemonicParsing(true);
         add(lblCours, 1, 1, 1, 1);
         TextField tfCours = new TextField();
+        tfCours.setPromptText("entrez le nom du cours");
+        nomResa = tfCours;
         Platform.runLater(()-> tfCours.requestFocus());
         lblCours.setLabelFor(tfCours);
         add(tfCours, 2, 1, 4, 1);
@@ -72,6 +86,8 @@ public class GridPaneFomulaireReservation extends GridPane {
         Label min1 = new Label("min");
         add(min1, 6, 4, 1, 1);
 
+        heuresDebut = new Pair<>(cbHeure1,cbMin1);
+
         Label hor2 = new Label("à");
         add(hor2, 2,5 , 1, 1);
         ComboBox<String> cbHeure2 = peupleComboBox(HEURES);
@@ -86,15 +102,35 @@ public class GridPaneFomulaireReservation extends GridPane {
         Label min2 = new Label("min");
         add(min2, 6, 5, 1, 1);
 
+        heuresFin = new Pair<>(cbHeure2,cbMin2);
+
         //VALIDATION
         Button annuler = new Button("_Annuler");
         annuler.setMnemonicParsing(true);
         add(annuler, 3, 6, 2, 1);
+
+        annuler.setOnAction(e -> {
+            //reset du formulaire
+            tfCours.setText("");
+            cbHeure1.getSelectionModel().select(7);
+            cbMin1.getSelectionModel().select(0);
+            cbHeure2.getSelectionModel().select(8);
+            cbMin2.getSelectionModel().select(0);
+            //refocus sur le textfield
+            tfCours.requestFocus();
+        });
         Button enregistrer = new Button("_Enregistrer");
         enregistrer.setMnemonicParsing(true);
+        enregistrer.addEventHandler(ActionEvent.ACTION, HBoxRoot.getControleur());
         add(enregistrer, 5, 6, 2, 1);
 
 
+    }
+    public DateCalendrier getDate() {
+        return dateDuJour;
+    }
+    public Label getDateLabel(){
+        return dateLabel;
     }
     private ComboBox<String> peupleComboBox(String[] strings){
         ComboBox<String> cb = new ComboBox<>();
@@ -102,5 +138,20 @@ public class GridPaneFomulaireReservation extends GridPane {
             cb.getItems().add(s);
         }
         return cb;
+    }
+
+    public Pair<ComboBox<String>, ComboBox<String>> getHeuresdebut() {
+        return heuresDebut;
+    }
+    public Pair<ComboBox<String>, ComboBox<String>> getHeuresfin() {
+        return heuresFin;
+    }
+    public TextField getNomResa() {
+        return nomResa;
+    }
+
+    public void update(DateCalendrier dateSel) {
+        dateDuJour = dateSel;
+        dateLabel.setText(dateDuJour.toString());
     }
 }

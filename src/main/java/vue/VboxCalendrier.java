@@ -1,6 +1,7 @@
 package vue;
 
 
+import controle.Controleur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -49,12 +50,7 @@ public class VboxCalendrier extends VBox {
                 tilePaneMois.getChildren().add(boutonDate);
 
                 boutonDate.setUserData(date);
-                boutonDate.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                            public void handle (ActionEvent actionEvent) {
-                        System.out.println(boutonDate.getUserData().toString());
-                    }
-                });
+                boutonDate.addEventHandler(ActionEvent.ACTION, HBoxRoot.getControleur());
                 if (date.getMois() != moisCalendrier.getMois()){
                     boutonDate.setId("horsMois");
                 }

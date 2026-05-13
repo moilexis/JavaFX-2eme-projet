@@ -37,7 +37,7 @@ public class PlanningCollections {
 
             treeResa.add(resa);
             mapResa.putIfAbsent(resa.getDate().getWeekOfYear(), new ArrayList<Reservation>());
-            mapResa.get(resa.getDate().getDayOfWeek()).add(resa);
+            mapResa.get(resa.getDate().getWeekOfYear()).add(resa);
         }
     }
 
